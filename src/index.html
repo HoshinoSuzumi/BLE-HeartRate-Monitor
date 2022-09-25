@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'"> -->
+    <title>BLE Heart Rate Monitor Test</title>
+    <style>
+        @import url('https://raw.githubusercontents.com/HoshinoSuzumi/HoshinoSuzumi/master/fonts/MiSans.css');
+
+        :root {
+            --app-background: #F0F2F2;
+            --app-color: #F25E86;
+
+            --title-bar-background: #F0F2F2;
+            --title-bar-color: #F25E86;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: var(--app-background);
+            font-family: MiSans, sans-serif;
+        }
+
+        .app-top-bar {
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0 8px;
+            background-color: var(--title-bar-background);
+            color: var(--title-bar-color);
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-app-region: drag;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .content {
+            width: 100%;
+            height: calc(100vh - 30px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #btn-connect-ble {
+            border: none;
+            outline: none;
+            margin: 0;
+            padding: 0;
+            width: 120px;
+            height: 120px;
+            background-color: #F25E86;
+            color: #FFF;
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: MiSans, sans-serif;
+            font-size: 16px;
+        }
+
+        #btn-connect-ble:disabled {
+            filter: grayscale(100%);
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-top-bar">蓝牙低功耗心率设备</div>
+
+    <div class="content">
+        <button id="btn-connect-ble">扫描设备</button>
+        <ul id="device-list"></ul>
+    </div>
+
+    <script src="./index.js"></script>
+    <script src="./renderer.js"></script>
+</body>
+
+</html>
