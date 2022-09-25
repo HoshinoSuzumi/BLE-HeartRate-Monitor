@@ -37,7 +37,7 @@ const createWindow = () => {
         } else callback('')
     })
 
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     win.loadFile('src/index.html')
 }
