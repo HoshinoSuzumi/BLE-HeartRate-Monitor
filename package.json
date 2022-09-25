@@ -19,6 +19,7 @@
     "electron": "^20.2.0"
   },
   "dependencies": {
+    "echarts": "^5.3.3",
     "electron-squirrel-startup": "^1.0.0"
   },
   "config": {

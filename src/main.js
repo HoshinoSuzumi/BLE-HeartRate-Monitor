@@ -2,11 +2,14 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
 app.commandLine.appendSwitch('enable-web-bluetooth', true);
+app.commandLine.appendSwitch('enable-experimental-web-platform-features');
 
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
+        minWidth: 800,
+        minHeight: 600,
         webPreferences: {
             // preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
@@ -14,7 +17,7 @@ const createWindow = () => {
         },
         frame: true,
         titleBarOverlay: {
-            color: '#F0F2F2',
+            color: '#e4e4e4',
             symbolColor: '#F25E86',
             height: 30
         },
@@ -23,15 +26,15 @@ const createWindow = () => {
 
     win.webContents.on('select-bluetooth-device', (event, deviceList, callback) => {
         event.preventDefault()
-        const scannedDeviceLists = [];
-        deviceList.forEach(device => {
-            if (device.deviceName.indexOf('未知') === -1) scannedDeviceLists.push(device)
-        });
-        console.log('scannedDeviceLists', scannedDeviceLists)
-        win.webContents.send('push-device-list', scannedDeviceLists);
-        if (deviceList && deviceList.length > 0) {
+        console.log(deviceList);
+        if (deviceList && deviceList.length > 0 && deviceList[0].deviceName.indexOf('未知') === -1) {
+            console.log('push');
+            win.webContents.send('push-connect-status', {
+                status: true,
+                device: deviceList[0]
+            })
             callback(deviceList[0].deviceId)
-        } 
+        } else callback('')
     })
 
     win.webContents.openDevTools();
